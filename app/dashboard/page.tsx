@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { supabase } from "@/app/lib/supabase";
 import { useAuth } from "@/app/lib/useAuth";
 import { getMoodTags } from "@/app/lib/getMoodTags";
@@ -25,7 +26,7 @@ type Entry = {
   custom_tags?: string[];
 };
 
-export default function DashboardPage() {
+function DashboardContent() {
   const [dramaName, setDramaName] = useState("");
   const [rating, setRating] = useState("");
   const [thoughts, setThoughts] = useState("");
@@ -589,5 +590,13 @@ export default function DashboardPage() {
       </div>
 
     </main>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="text-white p-10">Loading...</div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }
