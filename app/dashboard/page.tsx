@@ -374,25 +374,25 @@ function DashboardContent() {
   }
 
   return (
-    <main className="min-h-screen bg-black text-white px-8 py-12 relative">
+    <main className="min-h-screen bg-black text-white px-4 sm:px-6 md:px-8 py-12 relative">
 
       <Link href="/journal">
-        <button className="absolute top-6 left-6 bg-zinc-900 border border-zinc-700 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition">
+        <button className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-zinc-900/90 backdrop-blur-sm border border-zinc-700 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm hover:bg-zinc-800 transition z-20">
           ← Back to Journal Hub
         </button>
       </Link>
 
-      <h1 className="text-5xl font-bold text-center">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mt-10 sm:mt-0">
         Dramary Dashboard
       </h1>
 
-      <p className="text-zinc-400 text-center mt-4 text-lg">
+      <p className="text-zinc-400 text-center mt-4 text-sm sm:text-base md:text-lg px-4">
         Document the stories that stayed with you.
       </p>
 
-      <div className="mt-12 bg-zinc-900 p-10 rounded-3xl w-[90%] mx-auto">
+      <div className="mt-12 bg-zinc-900 p-4 sm:p-6 md:p-10 rounded-3xl w-full max-w-5xl mx-auto">
 
-        <h2 className="text-3xl font-bold mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center sm:text-left">
           {editId ? "Edit Journal Entry" : "Add Journal Entry"}
         </h2>
 
@@ -473,7 +473,7 @@ function DashboardContent() {
               Custom Tags
             </p>
 
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2">
 
               <input
                 type="text"
@@ -491,7 +491,7 @@ function DashboardContent() {
 
               <button
                 onClick={addCustomTag}
-                className="bg-zinc-500 px-4 rounded-xl hover:bg-pink-400 transition"
+                className="bg-zinc-500 px-4 py-3 rounded-xl hover:bg-pink-400 transition w-full sm:w-auto"
               >
                 Add
               </button>
@@ -531,21 +531,21 @@ function DashboardContent() {
                 Live Drama Preview
               </h3>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 
                 {/* Poster */}
                 <img
                   src={`https://image.tmdb.org/t/p/w300${dramaMeta.poster}`}
-                  className="w-32 rounded-xl"
+                  className="w-40 sm:w-32 mx-auto sm:mx-0 rounded-xl"
                 />
 
                 {/* Info */}
                 <div>
-                  <p className="text-sm text-zinc-300">
+                  <p className="text-sm text-zinc-300 text-center sm:text-left">
                     {dramaMeta.overview || "No description available."}
                   </p>
 
-                  <div className="mt-2 text-xs text-zinc-400">
+                  <div className="mt-2 text-xs text-zinc-400 text-center sm:text-left break-words">
                     Cast: {dramaMeta.cast?.map((c: any) => c.name).join(", ")}
                   </div>
                 </div>

@@ -260,11 +260,11 @@ export default function DiscoverPage() {
     }, [user, storageKey]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-900 to-zinc-950 text-white px-8 py-12">
+    <main className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-900 to-zinc-950 text-white px-4 sm:px-6 md:px-8 py-8 md:py-12 overflow-x-hidden">
 
       {/* BACK BUTTON */}
       <Link href="/journal">
-        <button className="absolute top-6 left-6 bg-zinc-900 border border-zinc-700 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition">
+        <button className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-zinc-900/90 backdrop-blur-sm border border-zinc-700 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm hover:bg-zinc-800 transition z-20">
           ← Back to Journal Hub
         </button>
       </Link>
@@ -272,11 +272,11 @@ export default function DiscoverPage() {
       {/* HERO */}
       <div className="text-center mt-10">
 
-        <h1 className="text-6xl font-bold">
+        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold leading-tight">
           Discover Worlds Beyond Reality
         </h1>
 
-        <p className="text-zinc-400 mt-4 text-lg">
+        <p className="text-zinc-400 mt-4 text-base md:text-lg px-2">
           Find your next favorite story.
         </p>
 
@@ -296,7 +296,7 @@ export default function DiscoverPage() {
               }
 
             }}
-            className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-6 py-4 text-lg outline-none focus:border-pink-500 transition"
+            className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl px-4 md:px-6 py-3 md:py-4 text-base md:text-lg outline-none focus:border-pink-500 transition"
         />
 
       </div>
@@ -315,7 +315,7 @@ export default function DiscoverPage() {
 
             <div
               key={search}
-              className="group flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 transition"
+              className="group flex items-center gap-2 px-3 py-1 text-sm rounded-full bg-zinc-900 border border-zinc-700 text-zinc-300 hover:bg-zinc-800 transition"
             >
 
               <button
@@ -360,7 +360,7 @@ export default function DiscoverPage() {
 
         <section className="mt-16">
 
-          <h2 className="text-3xl font-bold mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">
             🔎 Search Results
           </h2>
 
@@ -378,7 +378,8 @@ export default function DiscoverPage() {
 
           ) : (
 
-            <div className="flex gap-6 overflow-x-auto overflow-y-hidden pb-4 scrollbar-hide">
+            <div className="flex gap-4 md:gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide"
+              style={{ WebkitOverflowScrolling: "touch" }}>
 
               {searchResults.map((item) => (
 
@@ -407,17 +408,18 @@ export default function DiscoverPage() {
       )}
 
       {/* MADE FOR YOU */}
-      <section className="mt-20">
+      <section className="mt-12 md:mt-20">
 
         <div className="flex items-center justify-between mb-6">
 
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-2xl md:text-3xl font-bold">
             ✨ Made For You
           </h2>
 
         </div>
 
-        <div className="flex gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
+        <div className="flex gap-4 md:gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide"
+          style={{ WebkitOverflowScrolling: "touch" }}>
 
           {recommended.map((item) => (
 
@@ -434,17 +436,18 @@ export default function DiscoverPage() {
       </section>
 
       {/* TRENDING */}
-      <section className="mt-20">
+      <section className="mt-12 md:mt-20">
 
         <div className="flex items-center justify-between mb-6">
 
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-2xl md:text-3xl font-bold">
             🔥 Trending Now
           </h2>
 
         </div>
 
-        <div className="flex gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
+        <div className="flex gap-4 md:gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide"
+          style={{ WebkitOverflowScrolling: "touch" }}>
 
           {trending.map((item) => (
 
@@ -462,13 +465,14 @@ export default function DiscoverPage() {
 
       {Object.entries(genreSections).map(([genreName, items]) => (
 
-        <section key={genreName} className="mt-20">
+        <section key={genreName} className="mt-12 md:mt-20">
 
-          <h2 className="text-3xl font-bold mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6">
             {genreName}
           </h2>
 
-          <div className="flex gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
+          <div className="flex gap-4 md:gap-6 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide"
+            style={{ WebkitOverflowScrolling: "touch" }}>
 
             {items.map((item) => (
 

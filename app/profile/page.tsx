@@ -548,33 +548,33 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white pt-24 p-6 md:p-10">
+        <div className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-black text-white pt-24 px-4 sm:px-6 md:px-10 pb-10">
 
         <div className="mb-10">
         <Link href="/journal">
-            <button className="absolute top-6 left-6 bg-zinc-900 border border-zinc-700 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition">
+            <button className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-zinc-900/90 backdrop-blur-sm border border-zinc-700 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm hover:bg-zinc-800 transition z-20">
                 ← Back to Journal Hub
             </button>
         </Link>
         </div>
 
         {/* HERO SECTION */}
-        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-black p-8 mb-10 shadow-2xl">
+        <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-black p-5 sm:p-8 mb-10 shadow-2xl">
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_40%)]" />
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 items-center md:items-start text-center md:text-left">
 
             <div>
             <p className="text-sm uppercase tracking-[0.3em] text-pink-300 mb-2">
                 Dramary Profile
             </p>
 
-            <h1 className="text-4xl md:text-5xl font-black mb-3">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 break-words">
                 {formattedUsername}
             </h1>
 
-            <p className="text-gray-300 max-w-xl">
+            <p className="text-gray-300 max-w-xl text-sm sm:text-base leading-relaxed">
                 Your emotional cinematic universe —
                 every drama, every feeling, every memory.
             </p>
@@ -582,7 +582,7 @@ export default function ProfilePage() {
 
             <button
             onClick={() => setShowProfileModal(true)}
-            className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-pink-500 to-purple-700 flex items-center justify-center text-3xl font-bold shadow-lg hover:scale-105 transition"
+            className="w-24 h-24 rounded-full overflow-hidden bg-gradient-to-br from-pink-500 to-purple-700 flex items-center justify-center text-3xl font-bold shadow-lg hover:scale-105 transition mx-auto md:mx-0"
             >
 
             {profile?.profile_image_url ? (
@@ -615,7 +615,7 @@ export default function ProfilePage() {
             Total Journals
             </p>
 
-            <h2 className="text-4xl font-black">
+            <h2 className="text-3xl sm:text-4xl font-black break-words">
             {totalJournals}
             </h2>
 
@@ -628,7 +628,7 @@ export default function ProfilePage() {
             Favorites
             </p>
 
-            <h2 className="text-4xl font-black">
+            <h2 className="text-3xl sm:text-4xl font-black break-words">
             {totalFavorites}
             </h2>
 
@@ -641,7 +641,7 @@ export default function ProfilePage() {
             Average Rating
             </p>
 
-            <h2 className="text-4xl font-black">
+            <h2 className="text-3xl sm:text-4xl font-black break-words">
             {averageRating}
             </h2>
 
@@ -654,11 +654,11 @@ export default function ProfilePage() {
         {/* MOOD DISTRIBUTION */}
         <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6 shadow-xl">
 
-            <h2 className="text-2xl font-bold mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-6">
             Emotional Spectrum
             </h2>
 
-            <div className="h-[320px]">
+            <div className="h-[260px] sm:h-[320px]">
 
             {moodChartData.length === 0 ? (
             <div className="h-[320px] flex items-center justify-center text-zinc-500 text-sm">
@@ -671,7 +671,7 @@ export default function ProfilePage() {
                     data={moodChartData}
                     dataKey="count"
                     nameKey="mood"
-                    outerRadius={110}
+                    outerRadius={window.innerWidth < 640 ? 75 : 110}
                 >
                     {moodChartData.map((_, index) => (
                     <Cell
@@ -680,7 +680,7 @@ export default function ProfilePage() {
                     />
                     ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip contentStyle={{ borderRadius: "12px" }} />
                 </PieChart>
             </ResponsiveContainer>
             )}
@@ -693,7 +693,7 @@ export default function ProfilePage() {
 
                 <div
                 key={item.mood}
-                className="flex items-center gap-2 bg-zinc-800/70 px-3 py-2 rounded-xl border border-white/5"
+                className="flex items-center gap-2 bg-zinc-800/70 px-2 py-1 rounded-xl border border-white/5"
                 >
 
                 <div
@@ -704,7 +704,7 @@ export default function ProfilePage() {
                     }}
                 />
 
-                <p className="text-sm text-zinc-300">
+                <p className="text-xs sm:text-sm text-zinc-300">
                     {item.mood}: {item.count}
                 </p>
 
@@ -717,13 +717,13 @@ export default function ProfilePage() {
         </div>
 
         {/* WATCH STATUS */}
-        <div className="bg-zinc-900 border border-white/10 rounded-3xl p-6 shadow-xl">
+        <div className="bg-zinc-900 border border-white/10 rounded-3xl p-4 sm:p-6 shadow-xl overflow-hidden">
 
-            <h2 className="text-2xl font-bold mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-6">
             Watching Journey
             </h2>
 
-            <div className="h-[320px]">
+            <div className="h-[260px] sm:h-[320px]">
 
             {watchChartData.every((d) => d.value === 0) ? (
             <div className="h-[320px] flex items-center justify-center text-zinc-500 text-sm">
@@ -734,7 +734,7 @@ export default function ProfilePage() {
                 <BarChart data={watchChartData}>
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip contentStyle={{ borderRadius: "12px" }} />
                 <Bar dataKey="value" radius={[10, 10, 0, 0]}>
                     {watchChartData.map((_, index) => (
                     <Cell
@@ -757,7 +757,7 @@ export default function ProfilePage() {
 
         <div className="flex items-center gap-3 mb-6">
 
-            <h2 className="text-3xl font-black">
+            <h2 className="text-2xl sm:text-3xl font-black">
             ✨ AI Insights
             </h2>
 
@@ -768,78 +768,78 @@ export default function ProfilePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {/* PERSONALITY */}
-            <div className="bg-gradient-to-br from-pink-900/30 to-zinc-900 border border-pink-500/20 rounded-3xl p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(236,72,153,0.22)]">
+            <div className="bg-gradient-to-br from-pink-900/20 to-zinc-900 border border-pink-500/10 rounded-2xl p-5 sm:p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(236,72,153,0.18)]">
 
             <p className="text-sm uppercase tracking-wider text-pink-300 mb-3">
                 Viewer Personality
             </p>
 
-            <p className="text-zinc-200 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
                 {viewerPersonality}
             </p>
 
             </div>
 
             {/* RATING */}
-            <div className="bg-gradient-to-br from-purple-900/30 to-zinc-900 border border-purple-500/20 rounded-3xl p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(168,85,247,0.22)]">
+            <div className="bg-gradient-to-br from-purple-900/20 to-zinc-900 border border-purple-500/10 rounded-2xl p-5 sm:p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(236,72,153,0.18)]">
 
             <p className="text-sm uppercase tracking-wider text-purple-300 mb-3">
                 Rating Behavior
             </p>
 
-            <p className="text-zinc-200 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
                 {ratingInsight}
             </p>
 
             </div>
 
             {/* CUSTOM TAG */}
-            <div className="bg-gradient-to-br from-cyan-900/30 to-zinc-900 border border-cyan-500/20 rounded-3xl p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(34,211,238,0.22)]">
+            <div className="bg-gradient-to-br from-cyan-900/20 to-zinc-900 border border-cyan-500/10 rounded-2xl p-5 sm:p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(236,72,153,0.18)]">
 
             <p className="text-sm uppercase tracking-wider text-cyan-300 mb-3">
                 Storytelling Identity
             </p>
 
-            <p className="text-zinc-200 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
                 {customInsight}
             </p>
 
             </div>
 
             {/* WATCH HABITS */}
-            <div className="bg-gradient-to-br from-emerald-900/30 to-zinc-900 border border-emerald-500/20 rounded-3xl p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(16,185,129,0.22)]">
+            <div className="bg-gradient-to-br from-emerald-900/20 to-zinc-900 border border-emerald-500/10 rounded-2xl p-5 sm:p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(236,72,153,0.18)]">
 
             <p className="text-sm uppercase tracking-wider text-emerald-300 mb-3">
                 Watching Habits
             </p>
 
-            <p className="text-zinc-200 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
                 {watchHabitInsight}
             </p>
 
             </div>
 
             {/* FAVORITE */}
-            <div className="bg-gradient-to-br from-orange-900/30 to-zinc-900 border border-orange-500/20 rounded-3xl p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(249,115,22,0.22)]">
+            <div className="bg-gradient-to-br from-orange-900/20 to-zinc-900 border border-orange-500/10 rounded-2xl p-5 sm:p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(236,72,153,0.18)]">
 
             <p className="text-sm uppercase tracking-wider text-orange-300 mb-3">
                 Emotional Favorite
             </p>
 
-            <p className="text-zinc-200 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
                 {favoriteInsight}
             </p>
 
             </div>
 
             {/* HIGHEST RATED */}
-            <div className="bg-gradient-to-br from-blue-900/30 to-zinc-900 border border-blue-500/20 rounded-3xl p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(59,130,246,0.22)]">
+            <div className="bg-gradient-to-br from-blue-900/20 to-zinc-900 border border-blue-500/10 rounded-2xl p-5 sm:p-6 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(236,72,153,0.18)]">
 
             <p className="text-sm uppercase tracking-wider text-blue-300 mb-3">
                 Highest Rated Journey
             </p>
 
-            <p className="text-zinc-200 leading-relaxed">
+            <p className="text-sm sm:text-base text-zinc-200 leading-relaxed">
                 {highestRatedInsight}
             </p>
 
@@ -851,11 +851,11 @@ export default function ProfilePage() {
 
         {/* JOURNAL LIST */}
         <div>
-        <h2 className="text-2xl font-bold mb-5">
+        <h2 className="text-2xl sm:text-3xl font-black mb-5">
             📝 Your Journals
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
 
             {journals
                 .filter(
@@ -869,7 +869,7 @@ export default function ProfilePage() {
             <div
                 key={j.id}
                 onClick={() => setSelectedJournal(j)}
-                className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.03] hover:border-cyan-400/40 hover:shadow-[0_0_30px_rgba(34,211,238,0.28)]"
+                className="bg-gray-900 border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.03] hover:border-cyan-400/40 hover:shadow-[0_0_18px_rgba(34,211,238,0.28)]"
             >
 
                 {j.poster && (
@@ -880,13 +880,13 @@ export default function ProfilePage() {
                         : `https://image.tmdb.org/t/p/w500${j.poster}`
                     }
                     alt={j.drama_name}
-                    className="w-full h-72 object-cover"
+                    className="w-full h-64 sm:h-72 object-cover"
                     />
                 )}
 
-                <div className="p-5">
+                <div className="p-4 sm:p-5">
 
-                <h3 className="text-xl font-bold mb-2">
+                <h3 className="text-lg sm:text-xl font-bold mb-2 line-clamp-1">
                     {j.drama_name}
                 </h3>
 
@@ -919,21 +919,21 @@ export default function ProfilePage() {
             <section>
 
             <div className="flex items-center gap-3 mb-5">
-                <h2 className="text-3xl font-black">
+                <h2 className="text-2xl sm:text-3xl font-black">
                 🌟 Priority Queue
                 </h2>
 
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-pink-500/40 to-transparent" />
             </div>
 
-            <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex gap-4 md:gap-5 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
 
                 {priorityQueue.map((j) => (
 
                 <div
                     key={j.id}
                     onClick={() => setSelectedJournal(j)}
-                    className="min-w-[220px] w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-pink-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-pink-500/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.25)] cursor-pointer"
+                    className="min-w-[160px] sm:min-w-[220px] w-[160px] sm:w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-pink-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-pink-500/50 hover:shadow-[0_0_18px_rgba(236,72,153,0.25)] cursor-pointer"
                 >
 
                     {j.poster && (
@@ -943,7 +943,7 @@ export default function ProfilePage() {
                             ? j.poster
                             : `https://image.tmdb.org/t/p/w500${j.poster}`
                         }
-                        className="w-full h-[320px] min-h-[320px] object-cover"
+                        className="w-full h-[240px] sm:h-[320px] min-h-[240px] sm:min-h-[320px] object-cover"
                     />
                     )}
 
@@ -973,21 +973,21 @@ export default function ProfilePage() {
         <section>
 
             <div className="flex items-center gap-3 mb-5">
-            <h2 className="text-3xl font-black">
+            <h2 className="text-2xl sm:text-3xl font-black">
                 📌 Planned
             </h2>
 
             <div className="h-[1px] flex-1 bg-gradient-to-r from-purple-500/40 to-transparent" />
             </div>
 
-            <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex gap-4 md:gap-5 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
 
             {planned.map((j) => (
 
                 <div
                 key={j.id}
                 onClick={() => setSelectedJournal(j)}
-                className="min-w-[220px] w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-purple-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.25)] cursor-pointer"
+                className="min-w-[160px] sm:min-w-[220px] w-[160px] sm:w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-purple-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-purple-500/50 hover:shadow-[0_0_18px_rgba(168,85,247,0.25)] cursor-pointer"
                 >
 
                 {j.poster && (
@@ -997,7 +997,7 @@ export default function ProfilePage() {
                         ? j.poster
                         : `https://image.tmdb.org/t/p/w500${j.poster}`
                     }
-                    className="w-full h-[320px] min-h-[320px] object-cover"
+                    className="w-full h-[240px] sm:h-[320px] min-h-[240px] sm:min-h-[320px] object-cover"
                     />
                 )}
 
@@ -1023,21 +1023,21 @@ export default function ProfilePage() {
             <section>
 
             <div className="flex items-center gap-3 mb-5">
-                <h2 className="text-3xl font-black">
+                <h2 className="text-2xl sm:text-3xl font-black">
                 🎬 Watching
                 </h2>
 
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-cyan-500/40 to-transparent" />
             </div>
 
-            <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex gap-4 md:gap-5 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
 
                 {watching.map((j) => (
 
                 <div
                     key={j.id}
                     onClick={() => setSelectedJournal(j)}
-                    className="min-w-[220px] w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-cyan-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.25)] cursor-pointer"
+                    className="min-w-[160px] sm:min-w-[220px] w-[160px] sm:w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-cyan-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-cyan-500/50 hover:shadow-[0_0_18px_rgba(34,211,238,0.25)] cursor-pointer"
                 >
 
                     {j.poster && (
@@ -1047,7 +1047,7 @@ export default function ProfilePage() {
                             ? j.poster
                             : `https://image.tmdb.org/t/p/w500${j.poster}`
                         }
-                        className="w-full h-[320px] min-h-[320px] object-cover"
+                        className="w-full h-[240px] sm:h-[320px] min-h-[240px] sm:min-h-[320px] object-cover"
                     />
                     )}
 
@@ -1071,21 +1071,21 @@ export default function ProfilePage() {
             <section>
 
             <div className="flex items-center gap-3 mb-5">
-                <h2 className="text-3xl font-black">
+                <h2 className="text-2xl sm:text-3xl font-black">
                 ✅ Completed
                 </h2>
 
                 <div className="h-[1px] flex-1 bg-gradient-to-r from-emerald-500/40 to-transparent" />
             </div>
 
-            <div className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+            <div className="flex gap-4 md:gap-5 overflow-x-auto overflow-y-hidden pb-4 scroll-smooth snap-x snap-mandatory scrollbar-hide">
 
                 {completed.map((j) => (
 
                 <div
                     key={j.id}
                     onClick={() => setSelectedJournal(j)}
-                    className="min-w-[220px] w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-emerald-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.25)] cursor-pointer"
+                    className="min-w-[160px] sm:min-w-[220px] w-[160px] sm:w-[220px] bg-zinc-900 rounded-2xl overflow-hidden border border-emerald-500/20 transition-all duration-500 hover:scale-[1.03] hover:border-emerald-500/50 hover:shadow-[0_0_18px_rgba(16,185,129,0.25)] cursor-pointer"
                 >
 
                     {j.poster && (
@@ -1095,7 +1095,7 @@ export default function ProfilePage() {
                             ? j.poster
                             : `https://image.tmdb.org/t/p/w500${j.poster}`
                         }
-                        className="w-full h-[320px] min-h-[320px] object-cover"
+                        className="w-full h-[240px] sm:h-[320px] min-h-[240px] sm:min-h-[320px] object-cover"
                     />
                     )}
 
@@ -1118,9 +1118,9 @@ export default function ProfilePage() {
 
         {/* PROFILE MODAL */}
         {showProfileModal && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4 py-6 overflow-y-auto">
 
-        <div className="relative overflow-hidden bg-gradient-to-br from-zinc-950 via-purple-950/40 to-black p-8 rounded-[2rem] w-[90%] max-w-md border border-white/10 shadow-[0_0_40px_rgba(168,85,247,0.12)] backdrop-blur-xl">
+        <div className="relative overflow-hidden bg-gradient-to-br from-zinc-950 via-purple-950/40 to-black p-6 sm:p-8 rounded-[2rem] w-full max-w-md border border-white/10 shadow-[0_0_40px_rgba(168,85,247,0.12)] backdrop-blur-xl my-auto">
 
         {/* CINEMATIC LIGHT */}
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top_right,rgba(168,85,247,0.10),transparent_35%)]" />
@@ -1179,14 +1179,14 @@ export default function ProfilePage() {
         </div>
 
         {/* STATS */}
-        <div className="grid grid-cols-2 gap-4 mt-8">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-8">
 
             <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
             <p className="text-xs uppercase tracking-wider text-zinc-400">
                 Journals
             </p>
 
-            <h3 className="text-2xl font-black mt-2">
+            <h3 className="text-xl sm:text-2xl font-black mt-2 break-words">
                 {totalJournals}
             </h3>
             </div>
@@ -1196,7 +1196,7 @@ export default function ProfilePage() {
                 Favorites
             </p>
 
-            <h3 className="text-2xl font-black mt-2">
+            <h3 className="text-xl sm:text-2xl font-black mt-2 break-words">
                 {totalFavorites}
             </h3>
             </div>
@@ -1206,7 +1206,7 @@ export default function ProfilePage() {
                 Avg Rating
             </p>
 
-            <h3 className="text-2xl font-black mt-2">
+            <h3 className="text-xl sm:text-2xl font-black mt-2 break-words">
                 {averageRating}
             </h3>
             </div>
@@ -1216,7 +1216,7 @@ export default function ProfilePage() {
                 First Journal
             </p>
 
-            <h3 className="text-sm font-bold mt-2">
+            <h3 className="text-xl sm:text-2xl font-black mt-2 break-words">
                 {firstJournalDate}
             </h3>
             </div>
@@ -1227,7 +1227,7 @@ export default function ProfilePage() {
         <div className="mt-8 flex justify-center">
 
         <label
-            className="inline-block px-5 py-3 rounded-2xl bg-pink-500/20 border border-pink-500/30 text-pink-200 text-sm cursor-pointer transition hover:bg-pink-500 hover:text-white hover:scale-[1.03] shadow-lg"
+            className="inline-block w-full sm:w-auto text-center px-5 py-3 rounded-2xl bg-pink-500/20 border border-pink-500/30 text-pink-200 text-sm cursor-pointer transition hover:bg-pink-500 hover:text-white hover:scale-[1.03] shadow-lg"
         >
 
             Change Profile Picture
@@ -1297,7 +1297,7 @@ export default function ProfilePage() {
         <div className="mt-6 flex justify-center">
         <button
             onClick={handleDeleteAccount}
-            className="px-5 py-3 rounded-2xl bg-red-500/20 border border-red-500/30 text-red-300 text-sm hover:bg-red-500 hover:text-white transition hover:scale-[1.03]"
+            className="w-full sm:w-auto px-5 py-3 rounded-2xl bg-red-500/20 border border-red-500/30 text-red-300 text-sm hover:bg-red-500 hover:text-white transition hover:scale-[1.03]"
         >
             Delete Account
         </button>
@@ -1321,7 +1321,7 @@ export default function ProfilePage() {
         {selectedJournal && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
 
-            <div className="bg-zinc-900 p-6 rounded-2xl w-[90%] max-w-4xl relative shadow-2xl">
+            <div className="bg-zinc-900 p-4 sm:p-6 rounded-2xl w-[95%] max-w-4xl relative shadow-2xl max-h-[90vh] overflow-hidden border border-zinc-800">
 
             {/* CLOSE BUTTON */}
             <button
@@ -1331,7 +1331,7 @@ export default function ProfilePage() {
                 ✕
             </button>
 
-            <div className="flex gap-6">
+            <div className="flex flex-col md:flex-row gap-6 max-h-[80vh] overflow-y-auto pr-2">
 
                 {/* POSTER */}
                 {selectedJournal.poster && (
@@ -1341,14 +1341,14 @@ export default function ProfilePage() {
                         ? selectedJournal.poster
                         : `https://image.tmdb.org/t/p/w300${selectedJournal.poster}`
                     }
-                    className="w-44 h-64 object-cover rounded-xl"
+                    className="w-full md:w-44 h-72 md:h-64 object-cover rounded-xl"
                 />
                 )}
 
                 {/* DETAILS */}
                 <div className="flex-1">
 
-                <h2 className="text-3xl font-bold">
+                <h2 className="text-2xl sm:text-3xl font-bold leading-tight">
                     {selectedJournal.drama_name}
                 </h2>
 
@@ -1384,7 +1384,7 @@ export default function ProfilePage() {
                     onClick={() =>
                     updateWatchStatus(selectedJournal.id, "planned")
                     }
-                    className={`px-4 py-2 rounded-xl text-sm transition ${
+                    className={`px-3 sm:px-4 py-2 rounded-xl text-sm transition ${
                     selectedJournal.watch_status === "planned"
                         ? "bg-purple-500 text-white"
                         : "bg-zinc-800 text-zinc-300"
@@ -1397,7 +1397,7 @@ export default function ProfilePage() {
                     onClick={() =>
                     updateWatchStatus(selectedJournal.id, "watching")
                     }
-                    className={`px-4 py-2 rounded-xl text-sm transition ${
+                    className={`px-3 sm:px-4 py-2 rounded-xl text-sm transition ${
                     selectedJournal.watch_status === "watching"
                         ? "bg-cyan-500 text-white"
                         : "bg-zinc-800 text-zinc-300"
@@ -1410,7 +1410,7 @@ export default function ProfilePage() {
                     onClick={() =>
                     updateWatchStatus(selectedJournal.id, "completed")
                     }
-                    className={`px-4 py-2 rounded-xl text-sm transition ${
+                    className={`px-3 sm:px-4 py-2 rounded-xl text-sm transition ${
                     selectedJournal.watch_status === "completed"
                         ? "bg-emerald-500 text-white"
                         : "bg-zinc-800 text-zinc-300"
@@ -1427,7 +1427,7 @@ export default function ProfilePage() {
                 {selectedJournal.watch_status !== "completed" && (
                     <button
                     onClick={() => togglePriority(selectedJournal.id)}
-                    className={`px-4 py-2 rounded-xl text-sm transition ${
+                    className={`px-3 sm:px-4 py-2 rounded-xl text-sm transition ${
                         selectedJournal.priority_watch
                         ? "bg-pink-500 text-white"
                         : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
@@ -1449,7 +1449,7 @@ export default function ProfilePage() {
                         JSON.stringify(selectedJournal.cast || [])
                     )}`}
                     >
-                    <button className="px-4 py-2 rounded-xl text-sm bg-blue-500 hover:bg-blue-600 transition">
+                    <button className="px-3 sm:px-4 py-2 rounded-xl text-sm bg-blue-500 hover:bg-blue-600 transition">
                         ✍ Add Journal
                     </button>
                     </Link>
@@ -1459,14 +1459,14 @@ export default function ProfilePage() {
                     onClick={() =>
                     removeFromWatchlist(selectedJournal.id)
                     }
-                    className="px-4 py-2 rounded-xl text-sm bg-red-500 hover:bg-red-600 transition text-white"
+                    className="px-3 sm:px-4 py-2 rounded-xl text-sm bg-red-500 hover:bg-red-600 transition text-white"
                 >
                     Remove
                 </button>
 
                 </div>
 
-                <div className="mt-5 text-sm space-y-2 text-zinc-300">
+                <div className="mt-5 text-sm space-y-3 text-zinc-300 leading-relaxed">
 
                     <p>
                     🎵 OST: {selectedJournal.favorite_ost || "—"}

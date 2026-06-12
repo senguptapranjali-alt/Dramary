@@ -152,9 +152,9 @@ export default function DiscoverModal({
   if (!item) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4">
+    <div className="fixed inset-0 bg-black/80 z-50 overflow-y-auto px-4 py-6">
 
-      <div className="bg-zinc-900 rounded-3xl overflow-hidden max-w-5xl w-full relative border border-zinc-800 shadow-2xl">
+      <div className="bg-zinc-900 rounded-3xl overflow-hidden max-w-5xl w-full relative border border-zinc-800 shadow-2xl mx-auto my-auto max-h-[95vh] overflow-y-auto">
 
         {/* CLOSE */}
         <button
@@ -181,14 +181,14 @@ export default function DiscoverModal({
         )}
 
         {/* CONTENT */}
-        <div className="p-8 flex flex-col md:flex-row gap-8">
+        <div className="p-4 sm:p-8 flex flex-col md:flex-row gap-6 sm:gap-8">
 
           {/* POSTER */}
           {item.poster_path && (
 
             <img
               src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-              className="w-56 rounded-2xl shadow-xl"
+              className="w-40 sm:w-56 rounded-2xl shadow-xl mx-auto md:mx-0"
             />
 
           )}
@@ -196,11 +196,11 @@ export default function DiscoverModal({
           {/* DETAILS */}
           <div className="flex-1">
 
-            <h2 className="text-4xl font-bold">
+            <h2 className="text-2xl sm:text-4xl font-bold text-center md:text-left">
               {item.title || item.name}
             </h2>
 
-            <div className="flex gap-6 mt-4 text-zinc-400 text-sm">
+            <div className="flex gap-6 mt-4 text-zinc-400 text-sm justify-center md:justify-start">
 
               <p>
                 ⭐ {item.vote_average?.toFixed(1)}
@@ -228,12 +228,12 @@ export default function DiscoverModal({
             </p>
 
             {/* BUTTONS */}
-            <div className="mt-8 flex gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row gap-4">
 
             <button
               onClick={handleAddToWatchlist}
               disabled={isAdding || isAlreadyAdded}
-              className={`px-6 py-3 rounded-xl font-semibold transition flex items-center gap-2
+              className={`w-full sm:w-auto px-6 py-3 rounded-xl font-semibold transition flex items-center justify-center gap-2
                 ${
                   isAlreadyAdded
                     ? "bg-green-600 cursor-not-allowed"
@@ -252,7 +252,7 @@ export default function DiscoverModal({
                 <Link
                 href={`/dashboard?title=${encodeURIComponent(item.title || item.name || "")}&poster=${item.poster_path}&overview=${encodeURIComponent(item.overview || "")}&tmdb_id=${item.id}&media_type=${item.media_type || (item.title ? "movie" : "tv")}&cast=${encodeURIComponent(JSON.stringify(cast))}`}
                 >
-                <button className="bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-xl font-semibold transition">
+                <button className="w-full sm:w-auto bg-zinc-800 hover:bg-zinc-700 px-6 py-3 rounded-xl font-semibold transition">
                     Add Journal
                 </button>
                 </Link>
@@ -268,7 +268,7 @@ export default function DiscoverModal({
                       );
 
                     }}
-                    className="bg-red-600 hover:bg-red-500 px-6 py-3 rounded-xl font-semibold transition"
+                    className="w-full sm:w-auto bg-red-600 hover:bg-red-500 px-6 py-3 rounded-xl font-semibold transition"
                   >
                     ▶ Watch Trailer
                   </button>

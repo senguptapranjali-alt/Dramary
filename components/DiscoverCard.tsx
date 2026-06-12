@@ -22,7 +22,7 @@ export default function DiscoverCard({
   return (
     <div
       onClick={onClick}
-      className="min-w-[220px] w-[220px] snap-start bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-pink-500/40 transition duration-300 hover:scale-105 hover:shadow-xl hover:shadow-pink-500/10 cursor-pointer"
+      className="min-w-[170px] w-[170px] sm:min-w-[220px] sm:w-[220px] snap-start bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-pink-500/40 transition duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-pink-500/10 cursor-pointer flex-shrink-0"
     >
 
       {/* POSTER */}
@@ -33,17 +33,17 @@ export default function DiscoverCard({
             : "/placeholder-poster.png"
         }
         alt={item.title || item.name || "poster"}
-        className="w-full h-[320px] min-h-[320px] object-cover bg-zinc-800"
+        className="w-full h-[250px] sm:h-[320px] object-cover bg-zinc-800"
       />
 
       {/* INFO */}
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
 
-        <h3 className="font-bold text-lg line-clamp-1">
+        <h3 className="font-bold text-sm sm:text-lg line-clamp-1">
           {item.title || item.name}
         </h3>
 
-        <div className="flex justify-between mt-3 text-sm text-zinc-400">
+        <div className="flex justify-between mt-2 text-xs sm:text-sm text-zinc-400">
 
           <p>
             ⭐ {item.vote_average?.toFixed(1)}

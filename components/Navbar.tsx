@@ -132,20 +132,20 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex items-center justify-between px-8 py-6">
-      <h1 className="text-3xl font-bold tracking-wide text-white">
+    <nav className="relative z-40 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
+      <h1 className="text-2xl sm:text-3xl font-black tracking-wide text-white">
         Dramary
       </h1>
 
       {user ? (
         <div className="flex items-center gap-4">
-          <span className="text-zinc-300">
+          <span className="hidden sm:block text-zinc-300 text-sm">
             Welcome, {user.email.split("@")[0]}
           </span>
 
           <button
             onClick={() => supabase.auth.signOut()}
-            className="border border-white px-4 py-2 rounded-full hover:bg-white hover:text-black transition"
+            className="border border-white/20 bg-white/5 backdrop-blur-sm px-4 sm:px-5 py-2 rounded-full hover:bg-white hover:text-black transition duration-300 text-sm sm:text-base"
           >
             Logout
           </button>
@@ -153,7 +153,7 @@ export default function Navbar() {
       ) : (
         <button
           onClick={() => setShowModal(true)}
-          className="border border-white px-5 py-2 rounded-full hover:bg-white hover:text-black transition"
+          className="border border-white/20 bg-white/5 backdrop-blur-sm px-4 sm:px-5 py-2 rounded-full hover:bg-white hover:text-black transition duration-300 text-sm sm:text-base"
         >
           Login
         </button>
@@ -162,20 +162,20 @@ export default function Navbar() {
       {showModal && (
         <div
           onClick={handleBackdropClick}
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm flex items-center justify-center px-4"
         >
           <div
             ref={modalRef}
-            className="bg-zinc-900 border border-zinc-700 p-8 rounded-3xl w-[450px] relative shadow-2xl"
+            className="bg-zinc-900 border border-zinc-700 p-5 sm:p-8 rounded-3xl w-[95%] sm:w-[450px] relative shadow-2xl"
           >
             <button
               onClick={() => setShowModal(false)}
-              className="absolute top-4 right-5 text-zinc-400 hover:text-white text-xl"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white text-lg flex items-center justify-center transition"
             >
               ✕
             </button>
 
-            <h2 className="text-2xl font-bold mb-4 text-white">
+            <h2 className="text-2xl sm:text-3xl font-black mb-4 text-white">
               {mode === "login" ? "Welcome Back" : "Create Account"}
             </h2>
 
@@ -195,7 +195,7 @@ export default function Navbar() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
-              className="w-full p-3 mb-4 rounded-xl bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-white"
+              className="w-full p-3 mb-4 rounded-2xl bg-zinc-800/80 border border-zinc-700 focus:outline-none focus:border-pink-400 transition"
             />
 
             <input
@@ -203,13 +203,13 @@ export default function Navbar() {
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               placeholder="Password"
-              className="w-full p-3 mb-4 rounded-xl bg-zinc-800 border border-zinc-700 focus:outline-none focus:border-white"
+              className="w-full p-3 mb-4 rounded-2xl bg-zinc-800/80 border border-zinc-700 focus:outline-none focus:border-pink-400 transition"
             />
 
             <button
               disabled={loading}
               onClick={() => handleAuth(mode)}
-              className="w-full bg-white text-black py-3 rounded-xl font-semibold hover:scale-[1.02] transition disabled:opacity-50"
+              className="w-full bg-white text-black py-3 rounded-2xl font-semibold hover:scale-[1.02] transition duration-300 disabled:opacity-50"
             >
               {loading
                 ? "Please wait..."

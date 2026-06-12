@@ -317,7 +317,7 @@ export default function JournalsPage() {
             cast: Array.isArray(entry.cast) ? entry.cast : [],
           })
         }
-        className="bg-slate-900 border border-slate-700 p-6 rounded-2xl shadow-xl cursor-pointer transition duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-pink-500/20 hover:border-pink-500/40"
+        className="bg-slate-900 border border-slate-700 p-4 md:p-6 rounded-2xl shadow-xl cursor-pointer transition duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-pink-500/20 hover:border-pink-500/40 overflow-hidden"
       >
         <div className="flex justify-end">
           <button
@@ -333,7 +333,7 @@ export default function JournalsPage() {
           </button>
         </div>
 
-        <h2 className="text-3xl font-bold">{entry.dramaName}</h2>
+        <h2 className="text-2xl md:text-3xl font-bold break-words">{entry.dramaName}</h2>
 
         {entry.poster && (
           <img
@@ -342,7 +342,7 @@ export default function JournalsPage() {
               e.stopPropagation();
               setSelectedPoster(entry.poster || null);
             }}
-            className="rounded-xl mt-4 w-full max-w-xs cursor-pointer transition duration-300 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/20"
+            className="rounded-xl mt-4 w-full max-w-[220px] md:max-w-xs cursor-pointer transition duration-300 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/20"
           />
         )}
 
@@ -430,13 +430,13 @@ export default function JournalsPage() {
           <p>🧠 Ending Thoughts: {entry.endingThoughts || "—"}</p>
         </div>
 
-        <div className="mt-6 flex gap-3">
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <button
             onClick={(e) => {
               e.stopPropagation();
               handleDelete(entry.id);
             }}
-            className="bg-red-500 px-4 py-2 rounded-xl"
+            className="bg-red-500 hover:bg-red-600 transition px-4 py-2 rounded-xl"
           >
             Delete
           </button>
@@ -446,7 +446,7 @@ export default function JournalsPage() {
               e.stopPropagation();
               handleEdit(entry.id);
             }}
-            className="bg-blue-500 px-4 py-2 rounded-xl"
+            className="bg-blue-500 hover:bg-blue-600 transition px-4 py-2 rounded-xl"
           >
             Edit
           </button>
@@ -471,19 +471,19 @@ export default function JournalsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-900 to-zinc-950 text-white px-8 py-12 relative">
+    <main className="min-h-screen bg-gradient-to-br from-zinc-950 via-neutral-900 to-zinc-950 text-white px-4 md:px-8 py-8 md:py-12 relative overflow-x-hidden">
 
       <Link href="/journal">
-        <button className="absolute top-6 left-6 bg-zinc-900 border border-zinc-700 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition">
+        <button className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-zinc-900/90 backdrop-blur-sm border border-zinc-700 px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm hover:bg-zinc-800 transition z-20">
           ← Back to Journal Hub
         </button>
       </Link>
 
-      <h1 className="text-5xl font-bold text-center">
+      <h1 className="text-3xl md:text-5xl font-bold text-center mt-12 md:mt-0">
         Your Journals
       </h1>
 
-      <div className="w-[90%] mx-auto mt-8">
+      <div className="w-full md:w-[90%] mx-auto mt-8">
 
         <input
           type="text"
@@ -520,7 +520,7 @@ export default function JournalsPage() {
         />
 
         {showSuggestions && searchQuery.trim() !== "" && suggestions.length > 0 && (
-          <div className="bg-zinc-900 border border-zinc-700 mt-2 rounded-xl overflow-hidden">
+          <div className="bg-zinc-900 border border-zinc-700 mt-2 rounded-xl overflow-hidden max-h-60 overflow-y-auto">
             {suggestions.map((title, idx) => (
               <div
                 key={title}
@@ -538,14 +538,14 @@ export default function JournalsPage() {
         )}
       </div>
 
-      <div className="w-[90%] mx-auto mt-5 flex flex-wrap gap-3">
+      <div className="w-full md:w-[90%] mx-auto mt-5 flex flex-wrap gap-3">
 
       <button
         onClick={() => {
           setSelectedMoods([]);
           setAllMoodsSelected(true);
         }}
-        className={`px-4 py-2 rounded-full border transition ${
+        className={`px-3 py-1 text-xs md:text-sm rounded-full border transition ${
           allMoodsSelected
             ? "bg-pink-500 text-white border-pink-500"
             : "bg-zinc-900 border-zinc-700 text-zinc-300"
@@ -558,7 +558,7 @@ export default function JournalsPage() {
           <button
             key={mood}
             onClick={() => toggleMood(mood)}
-            className={`px-4 py-2 rounded-full border transition ${
+            className={`px-3 py-1 text-xs md:text-sm rounded-full border transition ${
               selectedMoods.includes(mood)
                 ? "bg-pink-500 text-white border-pink-500"
                 : "bg-zinc-900 border-zinc-700 text-zinc-300"
@@ -572,14 +572,14 @@ export default function JournalsPage() {
 
       {allCustomTags.length > 0 && (
 
-        <div className="w-[90%] mx-auto mt-4 flex flex-wrap gap-2">
+        <div className="w-full md:w-[90%] mx-auto mt-4 flex flex-wrap gap-2">
 
         <button
           onClick={() => {
             setSelectedCustomTags([]);
             setAllCustomSelected(true);
           }}
-          className={`px-3 py-1 rounded-full text-sm border transition ${
+          className={`px-3 py-1 text-xs md:text-sm rounded-full border transition ${
             allCustomSelected
               ? "bg-white text-black"
               : "bg-zinc-900 border-zinc-700 text-zinc-300"
@@ -608,7 +608,7 @@ export default function JournalsPage() {
 
       )}
 
-      <div className="w-[90%] mx-auto mt-12">
+      <div className="w-full md:w-[90%] mx-auto mt-12">
 
         {starredEntries.length > 0 && (
           <>
@@ -640,9 +640,9 @@ export default function JournalsPage() {
       </div>
 
       {selectedEntry && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/80 flex items-start md:items-center justify-center z-50 overflow-y-auto p-4">
           
-          <div className="bg-zinc-900 p-6 rounded-2xl w-[90%] max-w-4xl relative shadow-2xl">
+          <div className="bg-zinc-900 p-4 md:p-6 rounded-2xl w-full max-w-4xl relative shadow-2xl my-10 max-h-[90vh] overflow-y-auto">
 
             {/* CLOSE BUTTON */}
             <button
@@ -652,13 +652,13 @@ export default function JournalsPage() {
               ✕
             </button>
 
-            <div className="flex gap-6">
+            <div className="flex flex-col md:flex-row gap-6">
 
               {/* LEFT - POSTER */}
               {selectedEntry.poster && (
                 <img
                   src={`https://image.tmdb.org/t/p/w300${selectedEntry.poster}`}
-                  className="w-44 h-64 object-cover rounded-xl"
+                  className="w-full max-w-[220px] md:w-44 h-auto md:h-64 object-cover rounded-xl mx-auto"
                 />
               )}
 
@@ -720,7 +720,7 @@ export default function JournalsPage() {
         >
           <img
             src={`https://image.tmdb.org/t/p/w500${selectedPoster}`}
-            className="max-h-[90vh] rounded-xl shadow-2xl"
+            className="max-h-[85vh] max-w-[90vw] rounded-xl shadow-2xl"
           />
         </div>
       )}
