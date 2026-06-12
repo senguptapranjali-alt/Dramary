@@ -41,45 +41,40 @@ export default function DiscoverModal({
       if (!item) return;
       setTrailerKey("");
 
-      async function fetchTrailer() {
+    async function fetchTrailer() {
 
-        try {
+      try {
 
-          const mediaType =
-            item?.title ? "movie" : "tv";
+        const mediaType =
+          item?.title ? "movie" : "tv";
 
-          const res = await fetch(
-            `https://api.themoviedb.org/3/${mediaType}/${item?.id}/videos?api_key=${API_KEY}`
+        const res = await fetch(
+
+          `/api/tmdb/modal?id=${item?.id}&mediaType=${mediaType}`
+
+        );
+
+        const data = await res.json();
+
+        if (data.trailerKey) {
+
+          setTrailerKey(
+            data.trailerKey
           );
-
-          const data = await res.json();
-
-          const trailer = data.results?.find(
-            (v: any) =>
-              v.site === "YouTube" &&
-              v.type === "Trailer"
-          );
-
-          if (trailer) {
-            setTrailerKey(trailer.key);
-          }
-
-          const creditsRes = await fetch(
-            `https://api.themoviedb.org/3/${mediaType}/${item?.id}/credits?api_key=${API_KEY}`
-          );
-
-          const creditsData = await creditsRes.json();
-
-          setCast(
-            (creditsData.cast || []).slice(0, 8)
-          );
-
-        } catch (err) {
-
-          console.error("Trailer fetch failed:", err);
 
         }
+
+        setCast(data.cast || []);
+
+      } catch (err) {
+
+        console.error(
+          "Trailer fetch failed:",
+          err
+        );
+
       }
+    }
 
       fetchTrailer();
 

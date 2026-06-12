@@ -33,7 +33,6 @@ export default function DiscoverPage() {
     >({});
     const [recommended, setRecommended] = useState<TrendingItem[]>([]);
 
-  const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY!;
   const genres = [
     { name: "Romance", id: 10749 },
     { name: "Comedy", id: 35 },
@@ -74,31 +73,20 @@ export default function DiscoverPage() {
 
       try {
 
-        const [tvRes, movieRes] = await Promise.all([
+        const res = await fetch(
+          "/api/tmdb/trending"
+        );
 
-          fetch(
-            `https://api.themoviedb.org/3/trending/tv/week?api_key=${API_KEY}`
-          ),
+        const data = await res.json();
 
-          fetch(
-            `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
-          ),
-
-        ]);
-
-        const tvData = await tvRes.json();
-        const movieData = await movieRes.json();
-
-        const combined = [
-          ...(tvData.results || []),
-          ...(movieData.results || []),
-        ];
-
-        setTrending(combined);
+        setTrending(data.results || []);
 
       } catch (err) {
 
-        console.error("Failed to fetch trending:", err);
+        console.error(
+          "Failed to fetch trending:",
+          err
+        );
 
       }
     }
@@ -114,12 +102,12 @@ export default function DiscoverPage() {
           const [movieRes, tvRes] = await Promise.all([
 
             fetch(
-              `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genre.id}`
+              `/api/tmdb/discover?type=movie&genre=${genre.id}`
             ),
 
             fetch(
-              `https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&with_genres=${genre.id}`
-            ),
+              `/api/tmdb/discover?type=tv&genre=${genre.id}`
+            )
 
           ]);
 
@@ -202,7 +190,7 @@ export default function DiscoverPage() {
       try {
 
         const recRes = await fetch(
-          `https://api.themoviedb.org/3/${baseEntry.media_type}/${baseEntry.tmdb_id}/recommendations?api_key=${API_KEY}`
+          `/api/tmdb/recommendations?tmdbId=${baseEntry.tmdb_id}&mediaType=${baseEntry.media_type}`
         );
 
         const recData = await recRes.json();
@@ -237,7 +225,7 @@ export default function DiscoverPage() {
         try {
 
         const res = await fetch(
-            `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${searchQuery}`
+            `/api/tmdb/search?query=${searchQuery}`
         );
 
         const data = await res.json();

@@ -149,42 +149,29 @@ function DashboardContent() {
 
     try {
 
-      const searchRes = await fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(title)}`
+      const res = await fetch(
+        `/api/tmdb/preview?title=${encodeURIComponent(title)}`
       );
 
-      const searchData = await searchRes.json();
-
-      const bestMatch = searchData.results?.find(
-        (item: any) =>
-          item.media_type === "movie" ||
-          item.media_type === "tv"
-      );
-
-      if (!bestMatch) return null;
-
-      const mediaType = bestMatch.media_type;
-
-      const creditsRes = await fetch(
-        `https://api.themoviedb.org/3/${mediaType}/${bestMatch.id}/credits?api_key=${API_KEY}`
-      );
-
-      const creditsData = await creditsRes.json();
+      const data = await res.json();
 
       return {
 
-        tmdb_id: bestMatch.id,
-        media_type: mediaType,
-        poster: bestMatch.poster_path,
-        overview: bestMatch.overview,
-
-        cast: (creditsData.cast || []).slice(0, 8),
+        tmdb_id: data.tmdb_id,
+        media_type: data.media_type,
+        poster: data.poster,
+        overview: data.overview,
+        cast: data.cast || [],
 
       };
 
     } catch (err) {
 
-      console.error("TMDB metadata fetch failed:", err);
+      console.error(
+        "TMDB metadata fetch failed:",
+        err
+      );
+
       return null;
 
     }
@@ -359,41 +346,30 @@ function DashboardContent() {
   }
 
   async function fetchDramaInfo(title: string) {
+
     if (!title) return;
 
     try {
-      const [tvRes, movieRes] = await Promise.all([
-        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${API_KEY}&query=${encodeURIComponent(title)}`),
-        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(title)}`)
-      ]);
 
-      const tvData = await tvRes.json();
-      const movieData = await movieRes.json();
-
-      const combined = [...(tvData.results || []), ...(movieData.results || [])];
-
-      const firstResult = combined[0];
-
-      if (!firstResult) return;
-
-      const isMovie = !!firstResult.title;
-
-      const detailsRes = await fetch(
-        isMovie
-          ? `https://api.themoviedb.org/3/movie/${firstResult.id}?api_key=${API_KEY}&append_to_response=credits`
-          : `https://api.themoviedb.org/3/tv/${firstResult.id}?api_key=${API_KEY}&append_to_response=credits`
+      const res = await fetch(
+        `/api/tmdb/preview?title=${encodeURIComponent(title)}`
       );
 
-      const details = await detailsRes.json();
+      const data = await res.json();
 
       setDramaMeta({
-        poster: firstResult.poster_path || "",
-        overview: firstResult.overview || "",
-        cast: details.credits?.cast?.slice(0, 5) || [],
+        poster: data.poster || "",
+        overview: data.overview || "",
+        cast: data.cast || [],
       });
 
     } catch (err) {
-      console.error("Error fetching drama:", err);
+
+      console.error(
+        "Error fetching drama:",
+        err
+      );
+
     }
   }
 
